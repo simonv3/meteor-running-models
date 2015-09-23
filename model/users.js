@@ -4,14 +4,3 @@ Meteor.users.allow({
     return (userId && userId === user._id) || Meteor.user().is_admin;
   },
 });
-
-Meteor.users.deny({
-  update: function(userId, user, fieldnames, modifier) {
-    if (user.has_submitted === true &&
-        _.contains(fieldnames, 'has_submitted') && !Meteor.user().is_admin) {
-      return true;
-    }
-    return false;
-  }
-});
-
